@@ -196,6 +196,7 @@ class Payroll extends MY_Controller{
 			$uang_makan_bersih = 0;
 			$bonus = $this->input->post('bonus');
 			$potKoperasi = 0;
+			$tunjanganBpjs = 0;
 
 
 			//V2
@@ -406,16 +407,20 @@ class Payroll extends MY_Controller{
 			//			$totalPotongan = $totalPotAbsen  + $potPiutang   + $totalTelat + $potUangMakan;
 			$totalPotongan = 0  + $potPiutang   + $totalTelat + $potUangMakan + $potKoperasi;
 
-			if($this->input->post('include_bpjs', true) == 1 && $this->input->post('include_pph', true) == 2 ) {
-				$bpjs = $this->M_bpjs_config->findByEmployeeId_get($employeeId);
-				if($bpjs['no_bpjs'] == null || empty($bpjs['no_bpjs'])) {
-					$jht = 0.02 * $employee['basic_salary'];
-					$jp = 0.01 *  $employee['basic_salary'];
-					//					$totalPotongan = $totalPotAbsen  + $potPiutang   + $totalTelat + $jht + $jp;
-					$totalPotongan = 0  + $potPiutang   + $totalTelat + $jht + $jp;
-				}
+//			if($this->input->post('include_bpjs', true) == 1 && $this->input->post('include_pph', true) == 2 ) {
+//				$bpjs = $this->M_bpjs_config->findByEmployeeId_get($employeeId);
+//				if($bpjs['no_bpjs'] == null || empty($bpjs['no_bpjs'])) {
+//					$jht = 0.02 * $employee['basic_salary'];
+//					$jp = 0.01 *  $employee['basic_salary'];
+//					//					$totalPotongan = $totalPotAbsen  + $potPiutang   + $totalTelat + $jht + $jp;
+//					$totalPotongan = 0  + $potPiutang   + $totalTelat + $jht + $jp;
+//				}
+//			}
+			if ($this->input->post('include_bpjs', true) == 1) {
+				$tunjanganBpjs = 100000;
 			}
-			$totalGaji = $employee['basic_salary']  + $totalOvertime - $totalPotongan + $bonus + $uang_makan;
+
+			$totalGaji = $employee['basic_salary']  + $totalOvertime - $totalPotongan + $bonus + $uang_makan + $tunjanganBpjs;
 			$totalGajiSetelahPph = $totalGaji - $totalPotPph;
 
 			$dataBatch = [
@@ -442,7 +447,8 @@ class Payroll extends MY_Controller{
 				'pot_uang_makan' => $potUangMakan,
 				'uang_makan_bersih' => $uang_makan_bersih,
 				'gaji_pokok' => $employee['basic_salary'],
-				'pot_pinjaman' => $potKoperasi
+				'pot_pinjaman' => $potKoperasi,
+				'tunjangan_bpjs' => $tunjanganBpjs,
 			];
 
 			$totalSalary += $totalGajiSetelahPph;

@@ -1002,7 +1002,8 @@ class Core_data extends MY_Controller{
                             data-logo="'.htmlspecialchars($item['logo']).'"
                             data-uang-makan-bersih="'.htmlspecialchars($item['uang_makan_bersih']).'"
                             data-pot-uang-makan="'.htmlspecialchars($item['pot_uang_makan']).'"
-                            data-bonus="'.htmlspecialchars($item['bonus']).'">
+                            data-bonus="'.htmlspecialchars($item['bonus']).'"
+                            data-tunjangan-bpjs="'.htmlspecialchars($item['tunjangan_bpjs']).'">
                             RINCIAN
                         </button>
                         
@@ -1054,7 +1055,8 @@ class Core_data extends MY_Controller{
                             data-logo="'.htmlspecialchars($item['logo']).'"
                             data-uang-makan-bersih="'.htmlspecialchars($item['uang_makan_bersih']).'"
                             data-pot-uang-makan="'.htmlspecialchars($item['pot_uang_makan']).'"
-                            data-bonus="'.htmlspecialchars($item['bonus']).'">
+                            data-bonus="'.htmlspecialchars($item['bonus']).'"
+                            data-tunjangan-bpjs="'.htmlspecialchars($item['tunjangan_bpjs']).'">
                             RINCIAN
                         </button>
   
@@ -1069,6 +1071,7 @@ class Core_data extends MY_Controller{
 			$row[] = 'Rp.'.number_format($item['basic_salary'], 0 , ',', '.');
 			$row[] = 'Rp.'.number_format($item['basic_uang_makan'], 0 , ',', '.');
 			$row[] = 'Rp.'.number_format($item['bonus'], 0 , ',', '.');
+			$row[] = 'Rp.'.number_format($item['tunjangan_bpjs'], 0 , ',', '.');
 			$row[] = $item['total_dayoff'];
 			$row[] = $item['total_absen'];
 			$row[] = 'Rp.'.number_format($item['total_potongan'], 0 , ',', '.');

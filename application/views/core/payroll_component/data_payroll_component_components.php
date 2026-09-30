@@ -102,6 +102,7 @@
 							<h5 class="fw-bold mb-3">Penghasilan</h5>
 							<div class="d-flex justify-content-between"><span>Gaji Pokok</span><span id="gaji_pokok"></span></div>
 							<div class="d-flex justify-content-between"><span>Uang Makan</span><span id="uang_makan"></span></div>
+							<div class="d-flex justify-content-between"><span>BPJS Kesehatan</span><span id="bpjs"></span></div>
 							<div class="d-flex justify-content-between"><span>Lembur</span><span id="lembur"></span></div>
 							<div class="d-flex justify-content-between"><span>Bonus</span><span id="bonus"></span></div>
 							<hr>
@@ -320,6 +321,7 @@
 		const dayoff = parseFloat(button.getAttribute('data-total-dayoff')) || 0;
 		const gaji = parseFloat(button.getAttribute('data-basic-salary')) || 0;
 		const bonus = parseFloat(button.getAttribute('data-bonus')) || 0;
+		const tunjangan_bpjs = parseFloat(button.getAttribute('data-tunjangan-bpjs')) || 0;
 		const potongan_absen = parseFloat(button.getAttribute('data-potongan-absen')) || 0;
 		const absen_hari = parseFloat(button.getAttribute('data-absen-hari')) || 0;
 		const total_potongan = parseFloat(button.getAttribute('data-total-potongan')) || 0;
@@ -345,7 +347,7 @@
 
 		document.getElementById('logoProduct').src = base+logo;
 
-		const gaji_kotor = gaji+lembur+bonus+uang_makan;
+		const gaji_kotor = gaji+lembur+bonus+uang_makan+ tunjangan_bpjs;
 		console.log("ID:", id);
 
 		// Fungsi format Rupiah
@@ -368,7 +370,7 @@
 		// Masukkan data ke dalam modal
 		$('#absen_pc').text(absen);
 		$('#gaji_pokok').text(formatToRupiah(gaji));
-
+		$('#bpjs').text(formatToRupiah(tunjangan_bpjs));
 		$('#bonus').text(formatToRupiah(bonus));
 		$('#lembur').text(formatToRupiah(lembur));
 		$('#pot_absen').text(formatToRupiah(absen_hari));

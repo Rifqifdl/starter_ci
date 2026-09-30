@@ -67,6 +67,7 @@
 				<th>Gaji</th>
 				<th>Uang Makan</th>
 				<th>Bonus</th>
+				<th>BPJS Kesehatan</th>
 				<th>Day Off</th>
 				<th>Absen</th>
 				<th>Total Potongan</th>
@@ -135,7 +136,7 @@
 					orientation: 'portrait',
 					pageSize: 'A4',
 					exportOptions: {
-						columns: [1, 2, 3, 4, 5, 8, 9, 10, 12] // Hapus kolom Action, Day Off, Absen
+						columns: [1, 2, 3, 4, 5, 6, 9, 10, 11, 13] // Hapus kolom Action, Day Off, Absen
 					},
 					customize: function(doc) {
 						doc.defaultStyle.fontSize = 9;
@@ -160,7 +161,7 @@
 
 						// Hitung total gaji bersih
 						let totalGajiBersih = table
-							.column(12, { page: 'all' })
+							.column(13, { page: 'all' })
 							.data()
 							.reduce(function(a, b) {
 								let numA = parseFloat(a.toString().replace(/[^0-9,-]+/g, "").replace(",", "."));
